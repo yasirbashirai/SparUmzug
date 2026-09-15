@@ -2,3 +2,5 @@ node_modules/
 .DS_Store
 .vercel
 .env*
+# global gitignore ignores dist/ — this repo ships the built site, so un-ignore it
+!dist/

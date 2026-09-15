@@ -1,0 +1,52 @@
+WHATSAPP – AUTOMATISCHE ANTWORT (Begrüßungsnachricht)
+=====================================================
+Diese Nachricht kann NICHT von der Website aus gesetzt werden. Sie wird in der
+WhatsApp Business App eingerichtet:
+
+  WhatsApp Business → Einstellungen → Unternehmenstools → Begrüßungsnachricht
+  → "Begrüßungsnachricht senden" aktivieren → Text unten einfügen → Speichern
+
+Text (1:1 aus der Änderungsdatei):
+-----------------------------------------------------
+Hallo
+
+vielen Dank für Ihre Anfrage bei SparUmzug.
+
+Gerne erstellen wir Ihnen ein kostenloses und unverbindliches Angebot für Ihren Umzug.
+
+Bitte senden Sie uns folgende Informationen:
+
+Adresse: Auszugsadresse
+Adresse: Einzugsadresse
+Termin: Gewünschter Umzugstermin
+Wohnung: Wohnungsgröße (Zimmer oder m²)
+Aufzug: Aufzug vorhanden? (Ja/Nein)
+Umzugsgut: Besondere Gegenstände (z. B. Klavier, Tresor, Aquarium)
+
+Fotos/Videos: Fotos oder Videos können die Angebotserstellung erleichtern.
+
+✅ Kostenloses Angebot
+✅ Transparente Preise
+✅ Professionelle Umzugshelfer
+
+Wir melden uns schnellstmöglich zurück.
+
+Freundliche Grüße
+SparUmzug
+Telefon: 0176 66879641
+-----------------------------------------------------
+
+Was die WEBSITE jetzt macht (WhatsApp-Button, alle Seiten):
+Beim Klick öffnet sich WhatsApp mit dieser vorausgefüllten Nachricht, die der
+Kunde nur noch ausfüllen muss:
+
+Hallo SparUmzug, ich möchte ein kostenloses und unverbindliches Angebot für meinen Umzug anfordern.
+
+Auszugsadresse:
+Einzugsadresse:
+Gewünschter Umzugstermin:
+Wohnungsgröße (Zimmer oder m²):
+Aufzug vorhanden (Ja/Nein):
+Besondere Gegenstände (z. B. Klavier, Tresor, Aquarium):
+
+Fotos/Videos sende ich gerne mit.

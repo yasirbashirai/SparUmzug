@@ -1,0 +1,444 @@
+[
+ {
+  "name": "Moers",
+  "slug": "moers",
+  "template": "A",
+  "region": "in den Kreis Wesel, ins Ruhrgebiet",
+  "districts": [
+   "Moers-Mitte",
+   "Kapellen",
+   "Repelen",
+   "Meerbeck",
+   "Hülsdonk",
+   "Asberg",
+   "Scherpenberg",
+   "Utfort",
+   "Vinn",
+   "Schwafheim"
+  ],
+  "adj": "Moerser",
+  "regionName": "am Niederrhein"
+ },
+ {
+  "name": "Duisburg",
+  "slug": "duisburg",
+  "template": "B",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Duisburg-Mitte",
+   "Hamborn",
+   "Meiderich",
+   "Walsum",
+   "Homberg",
+   "Rheinhausen",
+   "Buchholz",
+   "Wanheimerort",
+   "Neudorf",
+   "Marxloh"
+  ],
+  "adj": "Duisburger",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Krefeld",
+  "slug": "krefeld",
+  "template": "C",
+  "region": "an den Niederrhein",
+  "districts": [
+   "Stadtmitte",
+   "Uerdingen",
+   "Bockum",
+   "Fischeln",
+   "Hüls",
+   "Oppum",
+   "Linn",
+   "Cracau",
+   "Traar",
+   "Gartenstadt"
+  ],
+  "adj": "Krefelder",
+  "regionName": "am Niederrhein"
+ },
+ {
+  "name": "Essen",
+  "slug": "essen",
+  "template": "A",
+  "region": "in das Ruhrgebiet",
+  "districts": [
+   "Rüttenscheid",
+   "Kettwig",
+   "Steele",
+   "Altenessen",
+   "Borbeck",
+   "Werden",
+   "Frohnhausen",
+   "Kray",
+   "Holsterhausen"
+  ],
+  "adj": "Essener",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Oberhausen",
+  "slug": "oberhausen",
+  "template": "B",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Sterkrade",
+   "Alt-Oberhausen",
+   "Osterfeld",
+   "Schmachtendorf",
+   "Königshardt",
+   "Holten",
+   "Buschhausen",
+   "Alstaden"
+  ],
+  "adj": "Oberhausener",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Düsseldorf",
+  "slug": "duesseldorf",
+  "template": "C",
+  "region": "ins Rheinland",
+  "districts": [
+   "Altstadt",
+   "Bilk",
+   "Pempelfort",
+   "Derendorf",
+   "Oberkassel",
+   "Gerresheim",
+   "Unterbilk",
+   "Benrath",
+   "Kaiserswerth",
+   "Rath"
+  ],
+  "adj": "Düsseldorfer",
+  "regionName": "im Rheinland"
+ },
+ {
+  "name": "Mülheim an der Ruhr",
+  "slug": "muelheim-an-der-ruhr",
+  "short": "Mülheim",
+  "template": "A",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Altstadt",
+   "Saarn",
+   "Broich",
+   "Speldorf",
+   "Styrum",
+   "Dümpten",
+   "Heißen",
+   "Menden",
+   "Holthausen"
+  ],
+  "adj": "Mülheimer",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Köln",
+  "slug": "koeln",
+  "template": "B",
+  "region": "ins Rheinland",
+  "districts": [
+   "Innenstadt",
+   "Ehrenfeld",
+   "Nippes",
+   "Lindenthal",
+   "Deutz",
+   "Mülheim",
+   "Kalk",
+   "Porz",
+   "Rodenkirchen",
+   "Chorweiler"
+  ],
+  "adj": "Kölner",
+  "regionName": "im Rheinland"
+ },
+ {
+  "name": "Dortmund",
+  "slug": "dortmund",
+  "template": "C",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Innenstadt",
+   "Hörde",
+   "Hombruch",
+   "Aplerbeck",
+   "Brackel",
+   "Eving",
+   "Huckarde",
+   "Mengede",
+   "Lütgendortmund",
+   "Scharnhorst"
+  ],
+  "adj": "Dortmunder",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Gelsenkirchen",
+  "slug": "gelsenkirchen",
+  "template": "A",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Altstadt",
+   "Buer",
+   "Horst",
+   "Schalke",
+   "Erle",
+   "Resse",
+   "Bismarck",
+   "Ückendorf",
+   "Rotthausen",
+   "Hassel"
+  ],
+  "adj": "Gelsenkirchener",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Frankfurt am Main",
+  "slug": "frankfurt-am-main",
+  "short": "Frankfurt",
+  "template": "B",
+  "region": "in die Rhein-Main-Region",
+  "districts": [
+   "Innenstadt",
+   "Sachsenhausen",
+   "Bornheim",
+   "Nordend",
+   "Westend",
+   "Bockenheim",
+   "Höchst",
+   "Rödelheim",
+   "Niederrad",
+   "Gallus"
+  ],
+  "adj": "Frankfurter",
+  "regionName": "in der Rhein-Main-Region"
+ },
+ {
+  "name": "Bonn",
+  "slug": "bonn",
+  "template": "C",
+  "region": "ins Rheinland",
+  "districts": [
+   "Zentrum",
+   "Bad Godesberg",
+   "Beuel",
+   "Hardtberg",
+   "Poppelsdorf",
+   "Endenich",
+   "Duisdorf",
+   "Kessenich",
+   "Tannenbusch",
+   "Auerberg"
+  ],
+  "adj": "Bonner",
+  "regionName": "im Rheinland"
+ },
+ {
+  "name": "Wuppertal",
+  "slug": "wuppertal",
+  "template": "A",
+  "region": "ins Bergische Land",
+  "districts": [
+   "Elberfeld",
+   "Barmen",
+   "Vohwinkel",
+   "Cronenberg",
+   "Ronsdorf",
+   "Langerfeld",
+   "Oberbarmen",
+   "Uellendahl",
+   "Beyenburg"
+  ],
+  "adj": "Wuppertaler",
+  "regionName": "im Bergischen Land"
+ },
+ {
+  "name": "Aachen",
+  "slug": "aachen",
+  "template": "B",
+  "region": "in die Städteregion Aachen",
+  "districts": [
+   "Innenstadt",
+   "Burtscheid",
+   "Brand",
+   "Eilendorf",
+   "Haaren",
+   "Laurensberg",
+   "Richterich",
+   "Kornelimünster",
+   "Walheim"
+  ],
+  "adj": "Aachener",
+  "regionName": "in der Städteregion Aachen"
+ },
+ {
+  "name": "Bergisch Gladbach",
+  "slug": "bergisch-gladbach",
+  "template": "C",
+  "region": "ins Rheinisch-Bergische",
+  "districts": [
+   "Stadtmitte",
+   "Bensberg",
+   "Refrath",
+   "Paffrath",
+   "Hand",
+   "Schildgen",
+   "Herkenrath",
+   "Hebborn",
+   "Gronau"
+  ],
+  "adj": "Bergisch Gladbacher",
+  "regionName": "im Rheinisch-Bergischen Kreis"
+ },
+ {
+  "name": "Neuss",
+  "slug": "neuss",
+  "template": "A",
+  "region": "in den Rhein-Kreis Neuss",
+  "districts": [
+   "Innenstadt",
+   "Norf",
+   "Reuschenberg",
+   "Furth",
+   "Weckhoven",
+   "Grimlinghausen",
+   "Holzheim",
+   "Rosellen",
+   "Uedesheim"
+  ],
+  "adj": "Neusser",
+  "regionName": "im Rhein-Kreis Neuss"
+ },
+ {
+  "name": "Bottrop",
+  "slug": "bottrop",
+  "template": "B",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Stadtmitte",
+   "Kirchhellen",
+   "Eigen",
+   "Fuhlenbrock",
+   "Boy",
+   "Welheim",
+   "Batenbrock",
+   "Vonderort",
+   "Grafenwald"
+  ],
+  "adj": "Bottroper",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Borken",
+  "slug": "borken",
+  "template": "C",
+  "region": "ins Münsterland",
+  "districts": [
+   "Borken-Stadt",
+   "Gemen",
+   "Weseke",
+   "Burlo",
+   "Marbeck",
+   "Rhedebrügge",
+   "Hoxfeld",
+   "Grütlohn"
+  ],
+  "adj": "Borkener",
+  "regionName": "im Münsterland"
+ },
+ {
+  "name": "Münster",
+  "slug": "muenster",
+  "template": "A",
+  "region": "ins Münsterland",
+  "districts": [
+   "Innenstadt",
+   "Hiltrup",
+   "Kinderhaus",
+   "Gievenbeck",
+   "Mauritz",
+   "Roxel",
+   "Wolbeck",
+   "Coerde",
+   "Kreuzviertel"
+  ],
+  "adj": "Münsteraner",
+  "regionName": "im Münsterland"
+ },
+ {
+  "name": "Bielefeld",
+  "slug": "bielefeld",
+  "template": "B",
+  "region": "nach Ostwestfalen-Lippe",
+  "districts": [
+   "Mitte",
+   "Brackwede",
+   "Schildesche",
+   "Heepen",
+   "Sennestadt",
+   "Jöllenbeck",
+   "Stieghorst",
+   "Dornberg",
+   "Gadderbaum"
+  ],
+  "adj": "Bielefelder",
+  "regionName": "in Ostwestfalen-Lippe"
+ },
+ {
+  "name": "Herne",
+  "slug": "herne",
+  "template": "C",
+  "region": "ins Ruhrgebiet",
+  "districts": [
+   "Herne-Mitte",
+   "Wanne",
+   "Eickel",
+   "Sodingen",
+   "Baukau",
+   "Röhlinghausen",
+   "Horsthausen",
+   "Börnig",
+   "Holsterhausen"
+  ],
+  "adj": "Herner",
+  "regionName": "im Ruhrgebiet"
+ },
+ {
+  "name": "Hattingen",
+  "slug": "hattingen",
+  "template": "A",
+  "region": "in den Ennepe-Ruhr-Kreis",
+  "districts": [
+   "Altstadt",
+   "Welper",
+   "Blankenstein",
+   "Niederwenigern",
+   "Holthausen",
+   "Winz-Baak",
+   "Bredenscheid",
+   "Niederbonsfeld"
+  ],
+  "adj": "Hattinger",
+  "regionName": "im Ennepe-Ruhr-Kreis"
+ },
+ {
+  "name": "Ahaus",
+  "slug": "ahaus",
+  "template": "B",
+  "region": "ins Münsterland",
+  "districts": [
+   "Ahaus-Stadt",
+   "Wessum",
+   "Wüllen",
+   "Alstätte",
+   "Ottenstein",
+   "Graes"
+  ],
+  "adj": "Ahauser",
+  "regionName": "im Münsterland"
+ }
+]

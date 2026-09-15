@@ -1,27 +1,63 @@
-# mae-umzug-v2
+# SparUmzug — website deliveries
 
-Patched production build of the SparUmzug / MAE moving-company website
-(live at https://mae-umzug-entruempelung.de/).
+Site for SparUmzug / MAE Umzug & Entrümpelung (live: https://mae-umzug-entruempelung.de,
+preview: https://spar-umzug.vercel.app). Built with Lovable — **no source code exists**,
+only the compiled bundle, so all changes are patched into the minified JS and new pages
+are added as static HTML next to the SPA.
 
-No source code exists for this site (built with Lovable, only the compiled
-`dist/` was available), so pricing updates are patched directly into the
-minified bundle `dist/assets/index-mae-v2p1.js` (renamed from
-`index-2q_isVEQ.js` for cache-busting).
+## Folders
+- `dist/` (this repo) = `website/` (local folder) — the full site, ready to serve (upload contents to Hostinger `public_html/`)
+- `sparumzug-deploy-sept16.zip` — current deployment zip (files at zip root, incl. .htaccess)
+- `sparumzug-deploy-july26.zip` — previous (July 26) deployment, kept as rollback
+- `backup-live-2026-07-26/` — the site as it was live before July 26
+- `tools/` — reproducible build scripts:
+  - `patch-bundle.py` — applies all price/WhatsApp/footer patches to
+    `src-bundle-july26.js` → `website/assets/index-mae-v3.js`
+  - `build-pages.py` + `cities.json` — generates the 23 city pages, the Preise page
+    and `sitemap.xml` (edit cities.json / templates, re-run)
+  - `whatsapp-message.txt` — the pre-filled WhatsApp text (shared by both scripts)
+  - `serve.js` — local preview with SPA fallback (`node tools/serve.js` → :8765)
+- `whatsapp-autoreply-for-client.txt` — the auto-reply text the client must paste into
+  WhatsApp Business (cannot be set from the website)
 
-## Price changes applied 2026-07-26 (client request)
+## Delivery 2026-09-16 (client PDF "Aenderung Sf7ah")
 
+### Calculator prices (homepage estimator + /calculator)
 | Item | Old | New |
 |---|---|---|
-| Grundkosten (all apartment sizes) | 200–1000 € | flat 150 € |
-| Entfernung pro km | 1,50 € | 0,75 € |
-| Verpackung / Einpacken / Auspacken / Umwickeln / Reinigung | 150 € each | 100 € each |
-| Alle Möbelstücke | — | each −5 € (floor 0 €) |
+| Entfernung pro km | 0,75 € | **0,60 €** |
+| Etage mit Aufzug (pro Etage, je Adresse) | 30 € | **20 €** |
+| Etage ohne Aufzug (pro Etage, je Adresse) | 50 € | **30 €** |
+| Montage / Demontage | 150 € | **80 €** |
+| Verpackung / Einpacken / Umwickeln / Auspacken | 100 € | **80 €** |
+| Reinigung | 100 € | 100 € (unchanged, per client) |
+| Entrümpelung | 200 € | 200 € (unchanged, per client) |
+| Halteverbotszone (je Adresse) | 150 € | **80 €** (aligned with new price page "ab 80 €") |
+| Möbelinventar | — | **−10 € each**; items already ≤ 10 € unchanged (52 lowered, 21 kept) |
+| Grundkosten | 150 € | 150 € (unchanged) |
+| Küche Teil/Komplett, Kartons, Parkabstand | — | unchanged |
 
-Unchanged: Montage 150 €, Demontage 150 €, Entrümpelung 200 €, floors,
-Halteverbot, kitchen, boxes/bags, parking distance.
+Also fixed stale labels on /services: "Ab €1,50/km" → "Ab €0,60/km" (DE + EN).
 
-Applies to both the homepage mini-estimator and the /calculator page.
+### New pages (static HTML, same look as the SPA)
+- `/umzugskosten/` — Preise page (PDF pages 7–11, incl. FAQ schema)
+- `/umzugsunternehmen-<stadt>/` — 23 city pages using the 3 PDF templates
+  (A = Essen, B = Oberhausen, C = Düsseldorf; other cities rotate A/B/C).
+  Every page links to `/calculator` (hero button, calculator card ×2, CTA band)
+  and to the Preise page, and lists the other cities.
+- `sitemap.xml` (+ referenced in robots.txt)
 
-## Deploy
+### Navigation
+- SPA footer: new "Umzugsunternehmen in Ihrer Stadt" row (all 23 cities) + "Preise"
+- SPA mobile menu: "Preise". Desktop nav intentionally NOT changed — a 6th link
+  overflows the header at ≤1440 px.
 
-Upload the contents of `dist/` to Hostinger (replaces the current site).
+### WhatsApp
+- Floating button + footer icon now open WhatsApp with a pre-filled quote checklist
+  (see `tools/whatsapp-message.txt`).
+- The client's "Automatische Antwort" text is delivered in
+  `whatsapp-autoreply-for-client.txt` — it must be set in WhatsApp Business.
+
+## Delivery 2026-07-26
+Prices: Grundkosten flat 150 €, 0,75 €/km, Verpackung/Einpacken/Auspacken/Umwickeln/
+Reinigung 100 €, all furniture −5 €. Favicon replaced with the "SU" logo.
