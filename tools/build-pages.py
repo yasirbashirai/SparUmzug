@@ -489,6 +489,49 @@ def preise_page():
                 description="Was kostet ein Umzug? Transparente Umzugspreise für Privat- und Firmenumzüge. Faire Preise, kostenloses Angebot und professionelle Umzugshelfer von SparUmzug.",
                 canonical=url, body=body, jsonld=jsonld, active="/umzugskosten/")
 
+# ---------------------------------------------------------------- SPA routes
+# Hostinger serves its own 404 for /calculator, /about, ... when the .htaccess
+# rewrite isn't active (Search Console "Nicht gefunden (404)", Oct 2026).
+# Fix that doesn't depend on .htaccess: give every SPA route a real
+# <route>/index.html = copy of the SPA shell with its own title/description/
+# canonical. The server 301s /about -> /about/; a tiny inline script strips
+# the slash again so the React router + active nav state see "/about".
+SPA_ROUTES = {
+    "about":       ("Über Uns | SparUmzug – Umzugsunternehmen aus Moers",
+                    "Lernen Sie SparUmzug kennen: Ihr zuverlässiges Umzugsunternehmen aus Moers für Umzüge, Transporte und Entrümpelungen in NRW und ganz Deutschland."),
+    "services":    ("Leistungen | Umzug, Montage, Verpackung & Entrümpelung – SparUmzug",
+                    "Umzüge, Möbelmontage, Verpackungsservice, Reinigung und Entrümpelung aus einer Hand. Faire Festpreise ab 0,60 € pro Kilometer."),
+    "calculator":  ("Umzugskostenrechner | Umzugskosten online berechnen – SparUmzug",
+                    "Berechnen Sie Ihre Umzugskosten in wenigen Schritten: Wohnungsgröße, Entfernung, Etagen, Möbel und Zusatzleistungen. Kostenlos und unverbindlich."),
+    "contact":     ("Kontakt | Kostenloses Umzugsangebot anfordern – SparUmzug",
+                    "Kontaktieren Sie SparUmzug per Telefon, WhatsApp oder E-Mail und erhalten Sie Ihr kostenloses, unverbindliches Umzugsangebot."),
+    "impressum":   ("Impressum | SparUmzug", "Impressum und Anbieterkennzeichnung von SparUmzug – Umzug & Entrümpelung, Moers."),
+    "agb":         ("AGB | SparUmzug", "Allgemeine Geschäftsbedingungen von SparUmzug – Umzug & Entrümpelung."),
+    "widerruf":    ("Widerrufsbelehrung | SparUmzug", "Widerrufsbelehrung und Widerrufsformular von SparUmzug – Umzug & Entrümpelung."),
+    "datenschutz": ("Datenschutzerklärung | SparUmzug", "Datenschutzerklärung von SparUmzug – Umzug & Entrümpelung."),
+}
+
+def build_spa_routes():
+    import re
+    shell = (ROOT / "index.html").read_text(encoding="utf-8")
+    out = []
+    for slug, (title, desc) in SPA_ROUTES.items():
+        url = f"{BASE_URL}/{slug}/"
+        h = shell
+        h = re.sub(r"<title>.*?</title>", f"<title>{e(title)}</title>", h, count=1)
+        h = re.sub(r'<meta name="description" content="[^"]*" />', f'<meta name="description" content="{e(desc)}" />', h, count=1)
+        h = re.sub(r'<link rel="canonical" href="[^"]*" />', f'<link rel="canonical" href="{url}" />', h, count=1)
+        h = re.sub(r'<meta property="og:title" content="[^"]*" />', f'<meta property="og:title" content="{e(title)}" />', h, count=1)
+        h = re.sub(r'<meta property="og:description" content="[^"]*" />', f'<meta property="og:description" content="{e(desc)}" />', h, count=1)
+        h = h.replace('<script type="module"',
+                      f'<script>if(location.pathname==="/{slug}/")history.replaceState(null,"","/{slug}"+location.search+location.hash)</script>\n    <script type="module"', 1)
+        assert h.count(url) == 1 and f"<title>{e(title)}</title>" in h, slug
+        d = ROOT / slug
+        d.mkdir(exist_ok=True)
+        (d / "index.html").write_text(h, encoding="utf-8")
+        out.append(f"/{slug}/")
+    return out
+
 # ---------------------------------------------------------------- build
 def main():
     written = []
@@ -501,7 +544,7 @@ def main():
     (ROOT / "umzugskosten" / "index.html").write_text(preise_page(), encoding="utf-8")
     written.append("/umzugskosten/")
 
-    spa = ["/", "/about", "/services", "/calculator", "/contact", "/impressum", "/agb", "/widerruf", "/datenschutz"]
+    spa = ["/"] + build_spa_routes()
     urls = "".join(f"  <url><loc>{BASE_URL}{p}</loc><lastmod>{TODAY}</lastmod></url>\n" for p in spa + written)
     (ROOT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n', encoding="utf-8")
     print(f"built {len(written)} pages + sitemap.xml")

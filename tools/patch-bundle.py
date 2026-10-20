@@ -2,7 +2,7 @@
 """
 Patch the minified SparUmzug bundle (no source exists — Lovable build).
 Input : tools/src-bundle-july26.js  (July-26 build, unpatched source of truth)
-Output: website/assets/index-mae-v3.js    (Sept-16 build)
+Output: website/assets/index-mae-v4.js    (Oct-21 build; v3 = Sept-16)
 
 Changes (client request 2026-09-16):
   1. Entfernung 0,75 €/km  -> 0,60 €/km (homepage estimator + calculator)
@@ -15,13 +15,17 @@ Changes (client request 2026-09-16):
   6. Services page label "Ab €1,50/km" -> "Ab €0,60/km" (EN too)
   7. WhatsApp float button: new pre-filled message (quote checklist)
   8. Mobile nav: "Preise" link (-> /umzugskosten/), footer: Preise + Standorte row
+Changes (client screenshots 2026-10-21):
+  9. Wohnzimmer: + Stuhl (5 €), + Fernseher (20 €, Mit/Ohne Montage toggle);
+     quote e-mail now states the Montage choice
+ 10. Parkplatz-Entfernung split into Beladestelle + Entladestelle (1 €/m each)
 """
 import re, sys, json, pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent / "website"
 SRC = HERE / "src-bundle-july26.js"
-DST = ROOT / "assets" / "index-mae-v3.js"
+DST = ROOT / "assets" / "index-mae-v4.js"
 s = SRC.read_text(encoding="utf-8")
 orig = s
 
@@ -104,6 +108,51 @@ rep('children:t.map(r=>a.jsx("li",{children:a.jsx(Ae,{to:r.href,className:"text-
 rep('children:[o.map(i=>a.jsx(Ae,{to:i.href,onClick:()=>t(!1),className:`px-4 py-3 rounded-lg font-medium transition-all duration-200 ${s(i.href)?"bg-primary text-primary-foreground":"text-foreground hover:bg-muted"}`,children:i.label},i.href)),',
     'children:[o.map(i=>a.jsx(Ae,{to:i.href,onClick:()=>t(!1),className:`px-4 py-3 rounded-lg font-medium transition-all duration-200 ${s(i.href)?"bg-primary text-primary-foreground":"text-foreground hover:bg-muted"}`,children:i.label},i.href)),'
     'a.jsx("a",{href:"/umzugskosten/",className:"px-4 py-3 rounded-lg font-medium transition-all duration-200 text-foreground hover:bg-muted",children:"Preise"},"preise"),', 1)
+
+# ---------------------------------------------------------------------------
+# Delivery 2026-10-21 (client screenshots)
+# ---------------------------------------------------------------------------
+
+# 9. Wohnzimmer: + Stuhl, + Fernseher with "Mit/Ohne Montage" toggle
+#    (added after step 4 so the -10 € rule doesn't touch them; final prices)
+rep('{id:"tv_board",name:"TV-Board",price:20,count:0}]}',
+    '{id:"tv_board",name:"TV-Board",price:20,count:0},'
+    '{id:"chair",name:"Stuhl",price:5,count:0},'
+    '{id:"tv",name:"Fernseher",price:20,count:0,hasAssembly:!0,withAssembly:!1}]}', 1)
+
+# quote e-mail: show the Montage choice for every item that has the toggle
+# (Fernseher + kitchen items — previously the choice was never sent)
+rep('.map(ue=>`${ue.name}: ${ue.count}x`)',
+    '.map(ue=>`${ue.name}: ${ue.count}x${ue.hasAssembly?ue.withAssembly?" (mit Montage)":" (ohne Montage)":""}`)', 1)
+
+# 10. Parkplatz-Entfernung: separate sliders for Beladestelle + Entladestelle
+#     S = Beladestelle (Auszug, existing state), pkE = Entladestelle (Einzug, new)
+rep('[S,P]=v.useState(0),', '[S,P]=v.useState(0),[pkE,setPkE]=v.useState(0),', 1)
+rep('Pa=S*1;', 'Pa=S*1+pkE*1;', 1)          # 1 €/m at each address
+
+def park_slider(label, val, setter):
+    return ('a.jsxs("div",{className:"space-y-4",children:['
+            'a.jsxs("div",{className:"flex justify-between text-sm",children:['
+            f'a.jsx("span",{{className:"text-muted-foreground",children:"{label}"}}),'
+            f'a.jsxs("span",{{className:"font-bold text-foreground",children:[{val},"m"]}})]}}),'
+            f'a.jsx("input",{{type:"range",min:"0",max:"100",value:{val},onChange:_=>{setter}(Number(_.target.value)),'
+            'className:"w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-accent"}),'
+            'a.jsxs("div",{className:"flex justify-between text-xs text-muted-foreground",children:['
+            'a.jsx("span",{children:"0m"}),a.jsx("span",{children:"100m"})]})]})')
+
+rep('children:"Entfernung Parkplatz zum Eingang"}),a.jsxs("div",{className:"space-y-4",children:[a.jsxs("div",{className:"flex justify-between text-sm",children:[a.jsx("span",{className:"text-muted-foreground",children:"Entfernung in Metern"}),a.jsxs("span",{className:"font-bold text-foreground",children:[S,"m"]})]}),a.jsx("input",{type:"range",min:"0",max:"100",value:S,onChange:_=>P(Number(_.target.value)),className:"w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-accent"}),a.jsxs("div",{className:"flex justify-between text-xs text-muted-foreground",children:[a.jsx("span",{children:"0m"}),a.jsx("span",{children:"100m"})]})]})]})',
+    'children:"Entfernung Parkplatz zum Eingang"}),a.jsxs("div",{className:"space-y-6",children:['
+    + park_slider("Beladestelle (Auszug) – Entfernung in Metern", "S", "P") + ','
+    + park_slider("Entladestelle (Einzug) – Entfernung in Metern", "pkE", "setPkE") + ']})]})', 1)
+
+# summary sidebar
+rep('S>0&&a.jsxs("div",{className:"flex justify-between",children:[a.jsx("span",{className:"text-muted-foreground",children:"Parkabstand"}),a.jsxs("span",{className:"font-medium text-foreground",children:[S,"m"]})]})',
+    'S>0&&a.jsxs("div",{className:"flex justify-between",children:[a.jsx("span",{className:"text-muted-foreground",children:"Parkabstand Beladestelle"}),a.jsxs("span",{className:"font-medium text-foreground",children:[S,"m"]})]}),'
+    'pkE>0&&a.jsxs("div",{className:"flex justify-between",children:[a.jsx("span",{className:"text-muted-foreground",children:"Parkabstand Entladestelle"}),a.jsxs("span",{className:"font-medium text-foreground",children:[pkE,"m"]})]})', 1)
+
+# quote e-mail
+rep('Parkabstand: ${S}m',
+    'Parkabstand Beladestelle (Auszug): ${S}m\nParkabstand Entladestelle (Einzug): ${pkE}m', 1)
 
 DST.write_text(s, encoding="utf-8")
 print(f"wrote {DST.name}: {len(orig)} -> {len(s)} bytes")

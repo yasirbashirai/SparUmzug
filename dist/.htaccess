@@ -1,3 +1,6 @@
+# SPA fallback. Every SPA route also exists as <route>/index.html, so pages
+# work even if this file is missing or rewrites are disabled.
+ErrorDocument 404 /index.html
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.html$ - [L]

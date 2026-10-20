@@ -6,8 +6,8 @@ only the compiled bundle, so all changes are patched into the minified JS and ne
 are added as static HTML next to the SPA.
 
 ## Folders
-- `dist/` (this repo) = `website/` (local folder) — the full site, ready to serve (upload contents to Hostinger `public_html/`)
-- `sparumzug-deploy-sept16.zip` — current deployment zip (files at zip root, incl. .htaccess)
+- `website/` — the full site, ready to serve (upload contents to Hostinger `public_html/`)
+- `sparumzug-deploy-oct21.zip` — current deployment zip; `sparumzug-deploy-sept16.zip` — previous (files at zip root, incl. .htaccess)
 - `sparumzug-deploy-july26.zip` — previous (July 26) deployment, kept as rollback
 - `backup-live-2026-07-26/` — the site as it was live before July 26
 - `tools/` — reproducible build scripts:
@@ -19,6 +19,17 @@ are added as static HTML next to the SPA.
   - `serve.js` — local preview with SPA fallback (`node tools/serve.js` → :8765)
 - `whatsapp-autoreply-for-client.txt` — the auto-reply text the client must paste into
   WhatsApp Business (cannot be set from the website)
+
+## Delivery 2026-10-21 (client screenshots) — `sparumzug-deploy-oct21.zip`
+- **Search Console "Nicht gefunden (404)"**: live Hostinger returned 404 for every SPA route
+  (/calculator, /about, …) because the .htaccess rewrite wasn't active — and sitemap.xml listed them.
+  Fix: `build-pages.py` now writes `<route>/index.html` (SPA shell with own title/description/
+  canonical) for all 8 SPA routes; sitemap uses `/route/` URLs; .htaccess adds `ErrorDocument 404`.
+  Homepage canonical/JSON-LD moved from deutschland-sparumzug.de to mae-umzug-entruempelung.de.
+- **Calculator**: Parkplatz-Entfernung split into Beladestelle (Auszug) + Entladestelle (Einzug),
+  1 €/m each; Wohnzimmer + Stuhl (5 €) + Fernseher (20 €, Mit/Ohne Montage toggle);
+  quote e-mail now shows both distances and the Montage choice (also for kitchen items).
+- Bundle renamed `index-mae-v4.js` (cache-bust).
 
 ## Delivery 2026-09-16 (client PDF "Aenderung Sf7ah")
 
